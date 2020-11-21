@@ -1,0 +1,71 @@
+<!-- saved from url=(0079)https://myquizprodruimages.blob.core.windows.net/customization/test/index2.html -->
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<script src="tf.min.js"></script>
+	<script src="nn_stuff.js"></script>
+
+</head>
+
+<body style="touch-action: none;">
+
+	<div id="test_div">
+
+
+		<canvas width="300" height="300" id="7huFmitUcXCkp04"></canvas>
+
+	</div>
+	<!--<canvas id="canv" width="128" height="64" style="background-color: #000000;"></canvas><br>-->
+	<label style="margin-top:10px">Рисуем</label>
+	<select style="margin-top:10px" id="mySelect">
+	<option>line</option><option>bat</option><option>basketball</option><option>basket</option><option>baseball_bat</option><option>baseball</option><option>barn</option><option>bandage</option><option>banana</option><option>backpack</option><option>axe</option><option>asparagus</option><option>arm</option><option>apple</option><option>anvil</option><option>ant</option><option>animal_migration</option><option>angel</option><option>ambulance</option><option>alarm_clock</option><option>airplane</option></select><br>
+	<button style="margin-top:10px" id="send">Определить</button><button id="clear">Стереть</button><br><br>
+	<span style="font-size: 25dp" id="result">Prob: 1</span><br>
+	<span style="font-size: 25dp" id="time"></span><br><br>
+
+
+
+	<script>
+		var classes = ['line','bat','basketball','basket','baseball_bat','baseball','barn','bandage','banana','backpack','axe','asparagus',
+					'arm','apple','anvil','ant','animal_migration','angel','ambulance','alarm_clock','airplane']
+	  //var classes = ['airplane', 'alarm clock', 'ambulance', 'angel', 'animal migration', 'ant', 'anvil', 'apple', 'arm', 'asparagus', 'axe', 'backpack', 'banana', 'bandage', 'barn', 'baseball', 'baseball bat', 'basket', 'basketball', 'bat', 'bathtub', 'beach', 'bear', 'beard', 'bed', 'bee', 'belt', 'bench', 'bicycle', 'binoculars', 'bird', 'birthday cake', 'blackberry', 'blueberry', 'book', 'boomerang', 'bottlecap', 'bowtie', 'bracelet', 'brain', 'bread', 'bridge', 'broccoli', 'broom', 'bucket', 'bulldozer', 'bus', 'bush', 'butterfly', 'cactus', 'cake', 'calculator', 'calendar', 'camel', 'camera', 'camouflage', 'campfire', 'candle', 'cannon', 'canoe', 'car', 'carrot', 'castle', 'cat', 'ceiling fan', 'cell phone', 'cello', 'chair', 'chandelier', 'church', 'circle', 'clarinet', 'clock', 'cloud', 'coffee cup', 'compass', 'computer', 'cookie', 'cooler', 'couch', 'cow', 'crab', 'crayon', 'crocodile', 'crown', 'cruise ship', 'cup', 'diamond', 'dishwasher', 'diving board', 'dog', 'dolphin', 'donut', 'door', 'dragon', 'dresser', 'drill', 'drums', 'duck', 'dumbbell', 'ear', 'elbow', 'elephant', 'envelope', 'eraser', 'eye', 'eyeglasses', 'face', 'fan', 'feather', 'fence', 'finger', 'fire hydrant', 'fireplace', 'firetruck', 'fish', 'flamingo', 'flashlight', 'flip flops', 'floor lamp', 'flower', 'flying saucer', 'foot', 'fork', 'frog', 'frying pan', 'garden', 'garden hose', 'giraffe', 'goatee', 'golf club', 'grapes', 'grass', 'guitar', 'hamburger', 'hammer', 'hand', 'harp', 'hat', 'headphones', 'hedgehog', 'helicopter', 'helmet', 'hexagon', 'hockey puck', 'hockey stick', 'horse', 'hospital', 'hot air balloon', 'hot dog', 'hot tub', 'hourglass', 'house', 'house plant', 'hurricane', 'ice cream', 'jacket', 'jail', 'kangaroo', 'key', 'keyboard', 'knee', 'ladder', 'lantern', 'laptop', 'leaf', 'leg', 'light bulb', 'lighthouse', 'lightning', 'line', 'lion', 'lipstick', 'lobster', 'lollipop', 'mailbox', 'map', 'marker', 'matches', 'megaphone', 'mermaid', 'microphone', 'microwave', 'monkey', 'moon', 'mosquito', 'motorbike', 'mountain', 'mouse', 'moustache', 'mouth', 'mug', 'mushroom', 'nail', 'necklace', 'nose', 'ocean', 'octagon', 'octopus', 'onion', 'oven', 'owl', 'paint can', 'paintbrush', 'palm tree', 'panda', 'pants', 'paper clip', 'parachute', 'parrot', 'passport', 'peanut', 'pear', 'peas', 'pencil', 'penguin', 'piano', 'pickup truck', 'picture frame', 'pig', 'pillow', 'pineapple', 'pizza', 'pliers', 'police car', 'pond', 'pool', 'popsicle', 'postcard', 'potato', 'power outlet', 'purse', 'rabbit', 'raccoon', 'radio', 'rain', 'rainbow', 'rake', 'remote control', 'rhinoceros', 'river', 'roller coaster', 'rollerskates', 'sailboat', 'sandwich', 'saw', 'saxophone', 'school bus', 'scissors', 'scorpion', 'screwdriver', 'sea turtle', 'see saw', 'shark', 'sheep', 'shoe', 'shorts', 'shovel', 'sink', 'skateboard', 'skull', 'skyscraper', 'sleeping bag', 'smiley face', 'snail', 'snake', 'snorkel', 'snowflake', 'snowman', 'soccer ball', 'sock', 'speedboat', 'spider', 'spoon', 'spreadsheet', 'square', 'squiggle', 'squirrel', 'stairs', 'star', 'steak', 'stereo', 'stethoscope', 'stitches', 'stop sign', 'stove', 'strawberry', 'streetlight', 'string bean', 'submarine', 'suitcase', 'sun', 'swan', 'sweater', 'swing set', 'sword', 't-shirt', 'table', 'teapot', 'teddy-bear', 'telephone', 'television', 'tennis racquet', 'tent', 'the eiffel tower', 'the great wall of china', 'the mona lisa', 'tiger', 'toaster', 'toe', 'toilet', 'tooth', 'toothbrush', 'toothpaste', 'tornado', 'tractor', 'traffic light', 'train', 'tree', 'triangle', 'trombone', 'truck', 'trumpet', 'umbrella', 'underwear', 'van', 'vase', 'violin', 'washing machine', 'watermelon', 'waterslide', 'whale', 'wheel', 'windmill', 'wine bottle', 'wine glass', 'wristwatch', 'yoga', 'zebra', 'zigzag'];
+	  var mySelect = document.getElementById("mySelect");
+	  for(var i=0;i<classes.length;i++){
+		var option = document.createElement("option");
+		option.text = classes[i];
+		mySelect.add(option);
+	  }
+      (async () => {
+
+        document.getElementById("result").innerHTML = "";
+
+        //var predictor = createPredictor(document.getElementById("test_div"), window.innerWidth*0.9, window.innerHeight*0.7);
+		var predictor = createPredictor(document.getElementById("test_div"), 300,300);
+
+          clear.addEventListener("click", function() {
+              predictor.clear_canvas();
+          });
+          var snd = document.getElementById("send");
+          snd.addEventListener("click", function() {
+            (async () => {
+              var res = await predictor.predict(mySelect.options[mySelect.selectedIndex].text, 'models');
+              document.getElementById("result").innerHTML = "Prob: " + res;
+            })();
+          });
+      })();
+
+
+	</script>
+
+
+
+	<canvas width="18" height="266" id="DE1FTty2e5D9X2E" hidden=""></canvas><canvas width="1" height="28"
+		id="YzEmRf5OxYyI5mv" hidden=""></canvas><canvas width="28" height="28" id="zDxc9zcSODzq1CJ"
+		hidden=""></canvas><canvas width="13" height="276" id="QN63HB1lysR981p" hidden=""></canvas><canvas width="1"
+		height="28" id="9M5kGuyDhbeacmw" hidden=""></canvas><canvas width="28" height="28" id="wICkdj9u8Pz4qD7"
+		hidden=""></canvas>
+</body>
+
+</html>
